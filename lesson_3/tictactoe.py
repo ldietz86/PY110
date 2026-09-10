@@ -53,5 +53,26 @@ def get_computer_move(board):
 player_choice = get_player_move(board)
 computer_choice = get_computer_move(board)
 
-print(player_choice)
-print(computer_choice)
+def detect_winner(board):
+    winning_lines = [
+        ['1', '2', '3'],
+        ['4', '5', '6'],
+        ['7', '8', '9'],
+        ['1', '4', '7'],
+        ['2', '5', '8'],
+        ['3', '6', '9'],
+        ['1', '5', '9'],
+        ['3', '5', '7'],
+        ]   
+            
+    for line in winning_lines:
+        [square_1, square_2, square_3] = line
+        if board[square_1] == HUMAN_MARKER and board[square_2] == HUMAN_MARKER and board[square_3] == HUMAN_MARKER:
+            return 'Player'
+        elif board[square_1] == COMPUTER_MARKER and board[square_2] == COMPUTER_MARKER and board[square_3] == COMPUTER_MARKER:
+            return 'Computer'
+        
+    return False
+
+def board_full(board):
+    return INITIAL_MARKER not in board.values()
