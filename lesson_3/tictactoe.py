@@ -33,3 +33,25 @@ def initialize_board():
 
 board = initialize_board()
 display_board(board)
+
+def get_player_move(board):
+    while True:
+        player_choice = input('Choose a square (1-9) ')
+        if player_choice not in board:
+            print('Invalid choice. Please try again.')
+        elif board[player_choice] != INITIAL_MARKER:
+            print('Square already taken. Please try again.')
+        else:
+            return player_choice
+
+def get_computer_move(board):
+    while True:
+        computer_choice = random.choice(list(board.keys()))
+        if board[computer_choice] == INITIAL_MARKER:
+            return computer_choice
+
+player_choice = get_player_move(board)
+computer_choice = get_computer_move(board)
+
+print(player_choice)
+print(computer_choice)
