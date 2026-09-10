@@ -1,6 +1,8 @@
 # Tic Tac Toe
+import random
 HUMAN_MARKER = 'X'
 COMPUTER_MARKER = 'O'
+INITIAL_MARKER = ' '
 
 print('Welcome to Tic Tac Toe!')
 
@@ -21,4 +23,13 @@ def display_board(board):
     print('     |     |')
     print('')
 
+def initialize_board():
+    board = {}
+        
+    for square in range(1, 10):
+        board[str(square)] = INITIAL_MARKER
+        
+    return board
+
+board = initialize_board()
 display_board(board)
