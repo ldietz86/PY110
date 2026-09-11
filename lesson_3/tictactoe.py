@@ -1,13 +1,15 @@
 # Tic Tac Toe
 import random
+import os
 HUMAN_MARKER = 'X'
 COMPUTER_MARKER = 'O'
 INITIAL_MARKER = ' '
 
 print('Welcome to Tic Tac Toe!')
+print(f'You are {HUMAN_MARKER}. Computer is {COMPUTER_MARKER}')
 
 def display_board(board):
-    print(f'You are {HUMAN_MARKER}. Computer is {COMPUTER_MARKER}')
+    os.system('clear')
 
     print('')
     print('     |     |')
@@ -31,9 +33,6 @@ def initialize_board():
         
     return board
 
-board = initialize_board()
-display_board(board)
-
 def get_player_move(board):
     while True:
         player_choice = input('Choose a square (1-9) ')
@@ -49,9 +48,6 @@ def get_computer_move(board):
         computer_choice = random.choice(list(board.keys()))
         if board[computer_choice] == INITIAL_MARKER:
             return computer_choice
-
-player_choice = get_player_move(board)
-computer_choice = get_computer_move(board)
 
 def detect_winner(board):
     winning_lines = [
@@ -76,3 +72,35 @@ def detect_winner(board):
 
 def board_full(board):
     return INITIAL_MARKER not in board.values()
+
+while True:
+    board = initialize_board()
+    display_board(board)
+
+    while True:
+        player_choice = get_player_move(board)
+        board[player_choice] = HUMAN_MARKER
+        if detect_winner(board) or board_full(board):
+            display_board(board)
+            break
+
+        computer_choice = get_computer_move(board)
+        board[computer_choice] = COMPUTER_MARKER
+        if detect_winner(board) or board_full(board):
+            display_board(board)
+            break
+        
+        display_board(board)
+
+    winner = detect_winner(board)
+    if winner == 'Player':
+        print("Player wins!")
+    elif winner == 'Computer':
+        print("Computer wins!")
+    else: 
+        print("It's a tie!")
+
+    answer = input('Play again? (y or n) ')
+    if answer.lower() in ['n', 'no']:
+        print("Thanks for playing Tic Tac Toe!")
+        break
