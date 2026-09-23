@@ -55,12 +55,11 @@ def join_or(sequence, delimiter=', ', word='or'):
 def join_or(sequence, delimiter=', ', word='or'):
     if len(sequence) == 0:
         return ''
-
     if len(sequence) == 1:
         return str(sequence[0])
-
     if len(sequence) == 2:
         return f'{sequence[0]} {word} {sequence[1]}'
 
     leading_items = delimiter.join(str(item) for item in sequence[:-1])
+    
     return f'{leading_items}{delimiter}{word} {sequence[-1]}'
