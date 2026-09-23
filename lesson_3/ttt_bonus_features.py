@@ -144,7 +144,6 @@ def choose_square(board, current_player):
     elif current_player == 'computer':
         computer_chooses_square(board)
 
-
 def alternate_player(current_player):
     if current_player == 'player':
         return 'computer'
